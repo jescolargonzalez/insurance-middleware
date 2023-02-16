@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="insurance-middleware:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>insurance-middleware</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="backend.tfm.middle-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="insurance-middleware:war exploded" />
+    </root>
+  </artifact>
+</component>
