@@ -37,7 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     .map(role -> new SimpleGrantedAuthority(role))
                     .collect(Collectors.toList());
 
-            var dataSecurityContext = new CustomAuthenticationToken(sessionInfoDto.getMail(), grantRoles);
+            var dataSecurityContext = new CustomAuthenticationToken(request.getHeader("Authorization"), grantRoles);
             dataSecurityContext.setAuthenticated(true);
 
             SecurityContextHolder.getContext().setAuthentication(dataSecurityContext);

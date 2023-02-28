@@ -11,6 +11,8 @@ tags:
     description: Operations about user
   - name: vehicle
     description: Operations about vehicle
+  - name: security
+    description: Operations about JWT
 paths:
   /security/authenticate:
     post:
@@ -75,6 +77,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+    get:
+      tags:
+        - user
+      summary: Get users
+      description: ''
+      operationId: getUsers
+      parameters:
+        - in: query
+          name: dni
+          description: 'The dni that needs to be fetched. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: mail
+          description: 'The mail that needs to be fetched. '
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: authorization
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersListWrapper'
+        '400':
+          description: Invalid dni or email supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: dni or email not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
   /users/{id}:
     get:
       tags:
@@ -218,6 +264,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+
+  /vehicles/{id}:
+    get:
+      tags:
+        - vehicle
+      summary: Find vehicles by id
+      description: returns vehicles by id
+      operationId: getVehiclesById
+      parameters:
+        - name: id
+          in: path
+          description: vehicle id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+
+
 components:
   schemas:
     User:
@@ -260,7 +330,7 @@ components:
         roles:
           type: array
           items:
-            type: integer
+            $ref: '#/components/schemas/Rol'
       required:
         - dni
         - name
@@ -271,6 +341,22 @@ components:
         - address
         - password
         - phone
+
+    UsersListWrapper:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+
+    Rol:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
 
     VehiclesListWrapper:
       type: object
@@ -320,7 +406,6 @@ components:
           type: string
         password:
           type: string
-
 
     TokenInfo:
       type: object

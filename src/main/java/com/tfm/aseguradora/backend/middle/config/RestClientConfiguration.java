@@ -13,16 +13,18 @@ public class RestClientConfiguration {
 
     @Bean
     @Primary
-    public com.tfm.aseguradora.backend.middle.users.ApiClient securityClient() {
-        var userApiClient = new com.tfm.aseguradora.backend.middle.users.ApiClient();
+    public com.tfm.aseguradora.backend.middle.users.ApiClient securityClient(
+            @Autowired @Qualifier("restTemplateJwtInterceptor") RestTemplate restTemplate
+    ) {
+        var userApiClient = new com.tfm.aseguradora.backend.middle.users.ApiClient(restTemplate);
         userApiClient.setBasePath(baseUsersHost);
         return userApiClient;
     }
 
-    @Bean
-    @Primary
+    @Bean("restTemplateJwtInterceptor")
     public RestTemplate restTemplate() {
         var restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new RestClientJwtInterceptor());
         return restTemplate;
     }
 

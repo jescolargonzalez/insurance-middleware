@@ -151,7 +151,7 @@
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/middle-api-contract.yml</inputSpec>
 							<language>spring</language>
-							<modelNameSuffix>Dto</modelNameSuffix>
+							<modelNameSuffix>ControllerDto</modelNameSuffix>
 							<apiPackage>com.tfm.aseguradora.backend.middle.controller</apiPackage>
 							<modelPackage>com.tfm.aseguradora.backend.middle.controller</modelPackage>
 							<configOptions>
@@ -169,7 +169,7 @@
 							<generatorName>java</generatorName>
 							<inputSpec>${project.basedir}/src/main/resources/policies-api-contract.yml</inputSpec>
 							<library>resttemplate</library>
-							<modelNameSuffix>Dto</modelNameSuffix>
+							<modelNameSuffix>ClientDto</modelNameSuffix>
 							<apiPackage>com.tfm.aseguradora.backend.middle.policies.client</apiPackage>
 							<modelPackage>com.tfm.aseguradora.backend.middle.policies.client.dto</modelPackage>
 							<generateSupportingFiles>true</generateSupportingFiles>
@@ -195,7 +195,7 @@
 							<generatorName>java</generatorName>
 							<inputSpec>${project.basedir}/src/main/resources/users-api-contract.yml</inputSpec>
 							<library>resttemplate</library>
-							<modelNameSuffix>Dto</modelNameSuffix>
+							<modelNameSuffix>ClientDto</modelNameSuffix>
 							<apiPackage>com.tfm.aseguradora.backend.middle.users.client</apiPackage>
 							<modelPackage>com.tfm.aseguradora.backend.middle.users.dto</modelPackage>
 							<generateSupportingFiles>true</generateSupportingFiles>

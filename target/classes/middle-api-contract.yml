@@ -25,22 +25,22 @@ externalDocs:
 servers:
   - url: https://petstore3.swagger.io/api/v3
 tags:
-  - name: user
+  - name: userMiddle
     description: Operations about user
-  - name: vehicle
+  - name: vehicleMiddle
     description: Operations about vehicle
-  - name: policy
+  - name: policyMiddle
     description: Operations about policy
-  - name: part
+  - name: partMiddle
     description: Operations about part
-  - name: peritage
+  - name: peritageMiddle
     description: Operations about peritage
 paths:
 
   /users:
     post:
       tags:
-        - user
+        - userMiddle
       summary: Create user
       description: This can only be done by the logged in user.
       operationId: createUser
@@ -60,7 +60,7 @@ paths:
   /users/{id}:
     get:
       tags:
-        - user
+        - userMiddle
       summary: Get user by ID
       description: ''
       operationId: getUserById
@@ -86,7 +86,7 @@ paths:
           description: User not found
     delete:
       tags:
-        - user
+        - userMiddle
       summary: Delete user by id
       description: This can only be done by the logged in user.
       operationId: deleteUser
@@ -104,7 +104,7 @@ paths:
           description: User not found
     put:
       tags:
-        - user
+        - userMiddle
       summary: Update user
       description: This can only be done by the logged in user.
       operationId: updateUser
@@ -128,7 +128,7 @@ paths:
   /polizyes:
     get:
       tags:
-        - policy
+        - policyMiddle
       summary: Find policy by dni
       description: Returns a single policy
       operationId: getPolicyByDni
@@ -156,7 +156,7 @@ paths:
           description: Policy not found
     post:
       tags:
-        - policy
+        - policyMiddle
       summary: create a policy for a user
       description: create a new policy in the bbdd
       operationId: createPolicy
@@ -178,7 +178,7 @@ paths:
   /polizyes/types:
     get:
       tags:
-        - policy
+        - policyMiddle
       summary: Finds types of police
       description: return types
       operationId: findTypesOfPolicy
@@ -195,7 +195,7 @@ paths:
   /polizyes/{idPolicy}/parts/{idPart}/peritage:
     post:
       tags:
-        - part
+        - partMiddle
       summary: execute peritage action to part
       description: execute peritage action to part
       operationId: doPeritageAction
@@ -230,7 +230,7 @@ paths:
   /vehicles:
     get:
       tags:
-        - vehicle
+        - vehicleMiddle
       summary: Find vehicle by dniPropietario
       description: returns vehicles by dniPropietario
       operationId: getVehicleByDni
@@ -254,7 +254,7 @@ paths:
           description: Vehicle not found
     post:
       tags:
-        - vehicle
+        - vehicleMiddle
       summary: crea un nuevo vehiculo
       description: vehicles
       operationId: createVehicle
@@ -277,7 +277,7 @@ paths:
   /polizyes/{idPoliza}/parts:
     post:
       tags:
-        - policy
+        - policyMiddle
       parameters:
         - name: idPoliza
           in: path
@@ -306,7 +306,7 @@ paths:
   /users/{benefitDni}/parts:
     get:
       tags:
-        - part
+        - partMiddle
       summary: Get parts by benefitDni
       description: ''
       operationId: getPartsByDni
@@ -408,25 +408,31 @@ components:
           type: integer
           format: int64
           example: 10
-        dniPropietario:
-          type: string
-          description: dni propietario del vehiculo != al dni tomadorseguro
         marca:
           type: string
-          description: hyundai , bmw , ferrari...
+          description: marca del vehiculo
+          example: hyundai , bmw , ford...
         modelo:
           type: string
           description: modelo del coche
+          example: Santafe , x5 , mustang...
         fechaMatriculacion:
           type: string
           format: date
+          example: 2023-12-23
         matricula:
           type: string
+        kilometros:
+          type: integer
+        userId:
+          type: integer
       required:
         - marca
         - modelo
+        - userId
         - fechaMatriculacion
         - matricula
+        - kilometros
 
     Part:
       type: object
@@ -469,4 +475,18 @@ components:
         id:
           type: integer
         name:
+          type: string
+
+
+    ErrorMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        description:
           type: string

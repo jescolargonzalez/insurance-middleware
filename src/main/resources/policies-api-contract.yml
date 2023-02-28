@@ -7,7 +7,7 @@ info:
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
-  
+
 tags:
   - name: policy
     description: Operations about policy
@@ -15,7 +15,7 @@ tags:
     description: Operations about part
   - name: peritage
     description: Operations about peritage
-    
+
 paths:
   /polizyes:
     get:
@@ -28,20 +28,22 @@ paths:
         - name: tomadorDni
           in: query
           description: filter tomadorDni
+          required: false
           schema:
             type: string
         - name: benefitDni
           in: query
+          required: false
           description: filter benefitDni
           schema:
-            type: string  
+            type: string
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'          
+                $ref: '#/components/schemas/Policy'
         '400':
           description: Invalid DNI supplied
         '404':
@@ -80,9 +82,8 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PolicyTypes'
+                type: object
+                $ref: '#/components/schemas/PolicyesTypesWrapper'
 
   /polizyes/{idPolicy}/parts/{idPart}/peritage:
     post:
@@ -101,6 +102,7 @@ paths:
           required: true
           schema:
             type: string
+
       summary: execute peritage action to part
       description: execute peritage action to part
       operationId: doPeritageAction
@@ -115,9 +117,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Peritage'
+                $ref: '#/components/schemas/Peritage'
 
   /polizyes/{idPolicy}/parts:
     post:
@@ -129,7 +129,7 @@ paths:
           description: idPoliza of part that needs to be fetched
           required: true
           schema:
-            type: string     
+            type: string
       summary: Place a part for a policy
       description: Place a new part in the policy?
       operationId: savePart
@@ -146,8 +146,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Policy'
         '405':
-            description: Invalid input
-            
+          description: Invalid input
+
   /users/{benefitDni}/parts:
     get:
       tags:
@@ -168,13 +168,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Part'          
+                $ref: '#/components/schemas/Part'
         '400':
           description: Invalid benefitDni supplied
         '404':
-            description: part not found         
-    
-            
+          description: part not found
+
+
 components:
   schemas:
     Policy:
@@ -183,32 +183,36 @@ components:
         id:
           type: integer
           format: int64
-        userDni:
-          type: string
-          example: '11111111A'
+        tomadorId:
+          type: integer
+        vehicleId:
+          type: integer
         benefitDni:
           type: string
           example: '22222222B'
-        type:
-          type: string
-          description: policy type
-          enum:
-            - fullrisk
-            - thirds
-            
-    PolicyTypes:
+        typeId:
+          type: integer
+
+    PolicyType:
       type: object
       properties:
         id:
           type: integer
-        name: 
+        name:
           type: string
-        description: 
-          enum:
-            - fullrisk
-            - thirds
+        description:
+          type: string
       required:
         - name
+
+    PolicyesTypesWrapper:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyType'
+
     Part:
       type: object
       properties:
@@ -223,14 +227,22 @@ components:
           type: integer
           format: int64
         addInfo:
-          type: string     
+          type: string
         pay:
-          type: boolean 
+          type: boolean
       required:
         - benefitDni
         - affectedDni
         - policyId
-        
+
+    PartsListWrapper:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+
     Peritage:
       type: object
       properties:
@@ -250,4 +262,17 @@ components:
         id:
           type: integer
         name:
+          type: string
+
+    ErrorMessage:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string
+        description:
           type: string
