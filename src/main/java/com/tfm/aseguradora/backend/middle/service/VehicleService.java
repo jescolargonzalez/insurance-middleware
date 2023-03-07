@@ -5,10 +5,13 @@ import com.tfm.aseguradora.backend.middle.service.exception.*;
 import com.tfm.aseguradora.backend.middle.service.mapper.*;
 import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
 import org.springframework.stereotype.*;
 
 import com.tfm.aseguradora.backend.middle.users.client.VehicleApi;
 import org.springframework.web.client.*;
+
+import java.util.stream.*;
 
 @Slf4j
 @Service
@@ -33,4 +36,17 @@ public class VehicleService {
             throw ex;
         }
     }
+
+    public VehicleDomain findById(Integer id) {
+        var vehicle = vehiclesApi.getVehiclesById(id);
+
+        if (vehicle != null) {
+            return mapper.fromDtoToDomain(vehicle);
+        }
+        else {
+            throw new ResourceNotFoundException(VehicleDomain.class, id);
+        }
+    }
+
+
 }

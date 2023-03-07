@@ -1,6 +1,7 @@
 package com.tfm.aseguradora.backend.middle.controller.mapper;
 
 import com.tfm.aseguradora.backend.middle.controller.*;
+import com.tfm.aseguradora.backend.middle.controller.VehicleControllerDto;
 import com.tfm.aseguradora.backend.middle.service.domain.*;
 import org.mapstruct.*;
 

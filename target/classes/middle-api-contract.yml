@@ -57,6 +57,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+
   /users/{id}:
     get:
       tags:
@@ -64,8 +65,6 @@ paths:
       summary: Get user by ID
       description: ''
       operationId: getUserById
-
-
       parameters:
         - in: path
           name: id
@@ -273,6 +272,27 @@ paths:
         '405':
           description: Invalid input
 
+  /vehicles/{id}:
+    get:
+      tags:
+        - vehicleMiddle
+      summary: Find vehicles by id
+      description: returns vehicles by id
+      operationId: getVehiclesById
+      parameters:
+        - name: id
+          in: path
+          description: vehicle id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
 
   /polizyes/{idPoliza}/parts:
     post:
@@ -339,30 +359,39 @@ components:
           format: int64
         dni:
           type: string
+          example: 11111111A
         name:
           type: string
+          example: trabajo
         surName:
           type: string
+          example: final master
         address:
           type: string
+          example: C/estomismo 11 9b
         iban:
           type: string
+          example: ES25 5555 9666 5566 5566 5566
         email:
           type: string
+          example: pruebas@yahoo.es
         password:
           type: string
-          example: '12345'
+          example: 12345Aa$
         phone:
           type: string
-          example: '12345'
+          example: 666 66 66 66
         birthday:
           type: string
-          format: Date <'Y-m-d'>
-        userStatus:
-          type: integer
-          description: User Status
-          format: int32
-          example: 1
+          format: Date <'m-d-Y'>
+        ciudad:
+          type: string
+        pais:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rol'
       required:
         - dni
         - name
@@ -373,6 +402,15 @@ components:
         - address
         - password
         - phone
+
+    Rol:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+
     Policy:
       type: object
       properties:

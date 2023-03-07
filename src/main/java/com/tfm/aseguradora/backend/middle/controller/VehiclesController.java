@@ -2,6 +2,7 @@ package com.tfm.aseguradora.backend.middle.controller;
 
 import com.tfm.aseguradora.backend.middle.controller.mapper.*;
 import com.tfm.aseguradora.backend.middle.service.*;
+import com.tfm.aseguradora.backend.middle.service.exception.*;
 import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -24,6 +25,7 @@ public class VehiclesController implements VehiclesApi {
     @Autowired
     private VehicleService vehicleService;
 
+
     @Override
     public Optional<NativeWebRequest> getRequest() {
         return VehiclesApi.super.getRequest();
@@ -43,6 +45,20 @@ public class VehiclesController implements VehiclesApi {
 
     @Override
     public ResponseEntity<VehicleControllerDto> getVehicleByDni(String dniPropietario) {
-        return VehiclesApi.super.getVehicleByDni(dniPropietario);
+
+
+        return null;
     }
+
+    @Override
+    public ResponseEntity<VehicleControllerDto> getVehiclesById(Integer id) {
+        var vehicle = vehicleService.findById(id);
+
+        var vehicleDto = mapper.fromDomainToDto(vehicle);
+
+        return ResponseEntity.ok(vehicleDto);
+    }
+
+
+
 }
