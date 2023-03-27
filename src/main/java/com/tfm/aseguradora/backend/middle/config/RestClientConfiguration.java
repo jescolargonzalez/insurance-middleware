@@ -24,7 +24,8 @@ public class RestClientConfiguration {
     @Bean("restTemplateJwtInterceptor")
     public RestTemplate restTemplate() {
         var restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new RestClientJwtInterceptor());
+        var restTemplateInterceptors = restTemplate.getInterceptors();
+        restTemplateInterceptors.add(new RestClientJwtInterceptor());
         return restTemplate;
     }
 

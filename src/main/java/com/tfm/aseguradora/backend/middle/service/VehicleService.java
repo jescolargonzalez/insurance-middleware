@@ -25,7 +25,6 @@ public class VehicleService {
 
     public VehicleDomain save(VehicleDomain domain)  {
         var vehicleDto = mapper.fromDomainToDto(domain);
-
         try {
             var vehicleClientDto = vehiclesApi.createVehicle(vehicleDto);
             return mapper.fromDtoToDomain(vehicleClientDto);

@@ -43,7 +43,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: '#/components/schemas/PolicyesWrapper'
         '400':
           description: Invalid DNI supplied
         '404':
@@ -82,7 +82,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 $ref: '#/components/schemas/PolicyesTypesWrapper'
 
   /polizyes/{idPolicy}/parts/{idPart}/peritage:
@@ -95,14 +94,13 @@ paths:
           description: idPoliza of part that needs to be fetched
           required: true
           schema:
-            type: string
+            type: integer
         - name: idPart
           in: path
           description: idPart that needs to be fetched
           required: true
           schema:
-            type: string
-
+            type: integer
       summary: execute peritage action to part
       description: execute peritage action to part
       operationId: doPeritageAction
@@ -129,7 +127,7 @@ paths:
           description: idPoliza of part that needs to be fetched
           required: true
           schema:
-            type: string
+            type: integer
       summary: Place a part for a policy
       description: Place a new part in the policy?
       operationId: savePart
@@ -141,14 +139,10 @@ paths:
       responses:
         '201':
           description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Policy'
         '405':
           description: Invalid input
 
-  /users/{benefitDni}/parts:
+  /parts:
     get:
       tags:
         - part
@@ -157,7 +151,7 @@ paths:
       operationId: getPartsByDni
       parameters:
         - name: benefitDni
-          in: path
+          in: query
           description: '¿?-¿?'
           required: true
           schema:
@@ -168,12 +162,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Part'
+                $ref: '#/components/schemas/PartsListWrapper'
         '400':
           description: Invalid benefitDni supplied
         '404':
           description: part not found
-
 
 components:
   schemas:
@@ -213,14 +206,20 @@ components:
           items:
             $ref: '#/components/schemas/PolicyType'
 
+    PolicyesWrapper:
+      type: object
+      properties:
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+
     Part:
       type: object
       properties:
         id:
           type: integer
           format: int64
-        benefitDni:
-          type: string
         affectedDni:
           type: string
         policyId:
@@ -231,7 +230,6 @@ components:
         pay:
           type: boolean
       required:
-        - benefitDni
         - affectedDni
         - policyId
 

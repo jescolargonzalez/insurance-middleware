@@ -44,7 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             chain.doFilter(request, response);
         } catch (RestClientException ex) {
-            logger.warn("Illegal acces attempt: " + ex.getMessage());
+            logger.warn("Illegal access attempt: " + ex.getMessage());
             throw ex;
         }
     }

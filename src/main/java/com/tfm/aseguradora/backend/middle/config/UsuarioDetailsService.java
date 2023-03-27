@@ -13,18 +13,15 @@ import com.tfm.aseguradora.backend.middle.users.dto.RolClientDto;
 
 @Service
 public class UsuarioDetailsService implements UserDetailsService  {
-
   @Autowired
   private UserApi userApi;
-
   @Autowired
   private JwtUtilService jwtUtilService;
 
   @Override
   public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
-
     var username = jwtUtilService.extractUsername(token.replace("Bearer ", ""));
-    var userListWrapper = userApi.getUsers(token, null, username);
+    var userListWrapper = userApi.getUsers(token, null, username,null);
     var userDto = userListWrapper.getUsers().get(0);
     if (userDto != null) {
       var roles = userDto.getRoles();

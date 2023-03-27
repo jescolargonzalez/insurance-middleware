@@ -8,8 +8,8 @@ import com.tfm.aseguradora.backend.middle.users.client.UserApi;
 import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.*;
+import com.tfm.aseguradora.backend.middle.users.dto.UserClientDto;
 import com.tfm.aseguradora.backend.middle.users.dto.RolClientDto;
-
 import java.util.*;
 import java.util.stream.*;
 
@@ -17,13 +17,12 @@ import java.util.stream.*;
 public class UserService {
     @Autowired
     private UserApi userapi;
-
     @Autowired
     private UserDtoInternalMapper mapper;
 
 
-    public UserDomain findById(int id) {
-         var aux =  userapi.getUserById(String.valueOf(id));
+    public UserDomain findById(String id) {
+         var aux =  userapi.getUserById(id);
          if(aux != null){
              return mapper.fromDtoToDomain(aux);
          }else{
@@ -46,4 +45,34 @@ public class UserService {
             throw ex;
         }
     }
+    public void deleteById(int id) {
+        try{
+            userapi.deleteUser(String.valueOf(id));
+        }catch (HttpClientErrorException ex){
+            if (ex.getRawStatusCode() == 400) {
+                throw new BadRequestException(ex.getMessage());
+            }
+            throw ex;
+        }
+    }
+    public UserDomain updateUserById(Integer id ,UserClientDto userClientDto){
+        var user = userapi.getUserById(String.valueOf(id));
+        if (user != null){
+            userapi.updateUser(String.valueOf(id),userClientDto);
+        }
+        var userDom = mapper.fromDtoToDomain(user);
+        return userDom;
+    }
+
+    public UserDomain findByMail(String mail){
+        var user = userapi.getUsers(null,null,mail,null);
+        var userDom = mapper.fromDtoToDomain(user.getUsers().get(0));
+        return userDom;
+    };
+    public List<UserDomain> findAll(){
+        var aux = userapi.getUsers(null,null,null,null);
+        var list =aux.getUsers().stream().map(mapper::fromDtoToDomain).collect(Collectors.toList());
+        return list;
+    }
+
 }
