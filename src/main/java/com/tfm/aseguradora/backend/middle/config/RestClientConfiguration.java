@@ -22,11 +22,17 @@ public class RestClientConfiguration {
     }
 
     @Bean("restTemplateJwtInterceptor")
+    @Primary
     public RestTemplate restTemplate() {
         var restTemplate = new RestTemplate();
         var restTemplateInterceptors = restTemplate.getInterceptors();
         restTemplateInterceptors.add(new RestClientJwtInterceptor());
         return restTemplate;
+    }
+
+    @Bean("restTemplateWithoutInterceptor")
+    public RestTemplate restTemplateWithoutinterceptor() {
+        return new RestTemplate();
     }
 
 }

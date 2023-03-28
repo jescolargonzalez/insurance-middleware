@@ -5,11 +5,9 @@ import com.tfm.aseguradora.backend.middle.service.exception.*;
 import com.tfm.aseguradora.backend.middle.service.mapper.*;
 import org.springframework.beans.factory.annotation.*;
 import com.tfm.aseguradora.backend.middle.users.client.UserApi;
-import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.*;
-import com.tfm.aseguradora.backend.middle.users.dto.UserClientDto;
-import com.tfm.aseguradora.backend.middle.users.dto.RolClientDto;
+
 import java.util.*;
 import java.util.stream.*;
 
@@ -19,7 +17,6 @@ public class UserService {
     private UserApi userapi;
     @Autowired
     private UserDtoInternalMapper mapper;
-
 
     public UserDomain findById(String id) {
          var aux =  userapi.getUserById(id);
@@ -55,13 +52,13 @@ public class UserService {
             throw ex;
         }
     }
-    public UserDomain updateUserById(Integer id ,UserClientDto userClientDto){
+    public void updateUserById(Integer id , UserDomain userDomain){
         var user = userapi.getUserById(String.valueOf(id));
+        var userDto = mapper.fromDomainToDto(userDomain);
         if (user != null){
-            userapi.updateUser(String.valueOf(id),userClientDto);
+            userapi.updateUser(String.valueOf(id),userDto);
         }
-        var userDom = mapper.fromDtoToDomain(user);
-        return userDom;
+
     }
 
     public UserDomain findByMail(String mail){
@@ -71,7 +68,7 @@ public class UserService {
     };
     public List<UserDomain> findAll(){
         var aux = userapi.getUsers(null,null,null,null);
-        var list =aux.getUsers().stream().map(mapper::fromDtoToDomain).collect(Collectors.toList());
+        var list = aux.getUsers().stream().map(mapper::fromDtoToDomain).collect(Collectors.toList());
         return list;
     }
 
