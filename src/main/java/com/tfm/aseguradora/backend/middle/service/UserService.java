@@ -58,7 +58,6 @@ public class UserService {
         if (user != null){
             userapi.updateUser(String.valueOf(id),userDto);
         }
-
     }
 
     public UserDomain findByMail(String mail){
@@ -66,6 +65,13 @@ public class UserService {
         var userDom = mapper.fromDtoToDomain(user.getUsers().get(0));
         return userDom;
     };
+
+    public UserDomain findByDni(String dni){
+        var user = userapi.getUsers(null,dni,null,null);
+        var userDom = mapper.fromDtoToDomain(user.getUsers().get(0));
+        return userDom;
+    };
+
     public List<UserDomain> findAll(){
         var aux = userapi.getUsers(null,null,null,null);
         var list = aux.getUsers().stream().map(mapper::fromDtoToDomain).collect(Collectors.toList());

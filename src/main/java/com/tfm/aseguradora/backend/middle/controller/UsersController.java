@@ -51,7 +51,7 @@ public class UsersController implements UsersApi {
         return ResponseEntity.ok().build();
     }
 
-    //falta por terminar
+    //falta por terminar mover a parts
     @Override
     public ResponseEntity<PartControllerDto> getPartsByDni(String benefitDni) {
         var list = "";
