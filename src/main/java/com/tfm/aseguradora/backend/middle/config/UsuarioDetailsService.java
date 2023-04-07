@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.tfm.aseguradora.backend.middle.users.client.UserApi;
-import com.tfm.aseguradora.backend.middle.users.dto.RolClientDto;
+import com.tfm.aseguradora.backend.generated.middle.users.client.UserApi;
+import com.tfm.aseguradora.backend.generated.middle.users.dto.RolClientDto;
 
 @Service
 public class UsuarioDetailsService implements UserDetailsService  {

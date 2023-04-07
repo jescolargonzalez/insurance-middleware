@@ -2,16 +2,15 @@ package com.tfm.aseguradora.backend.middle.controller;
 
 import com.tfm.aseguradora.backend.middle.controller.mapper.*;
 import com.tfm.aseguradora.backend.middle.service.*;
-import com.tfm.aseguradora.backend.middle.service.exception.*;
 import lombok.extern.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.*;
 
-import com.tfm.aseguradora.backend.middle.controller.VehicleControllerDto;
+import com.tfm.aseguradora.backend.generated.middle.controller.VehiclesApi;
 
-import com.tfm.aseguradora.backend.middle.controller.VehiclesApi;
+import com.tfm.aseguradora.backend.generated.middle.controller.VehicleControllerDto;
 
 import java.util.*;
 
@@ -43,14 +42,6 @@ public class VehiclesController implements VehiclesApi {
         return ResponseEntity.ok(vehicleDto);
     }
 
-//TODO implementar getVehiclesByDni modificar a list a devolver
-    @Override
-    public ResponseEntity<VehicleControllerDto> getVehicleByDni(String dniPropietario) {
-
-
-        return null;
-    }
-
     @Override
     public ResponseEntity<VehicleControllerDto> getVehiclesById(Integer id) {
         var vehicle = vehicleService.findById(id);
@@ -59,6 +50,16 @@ public class VehiclesController implements VehiclesApi {
 
         return ResponseEntity.ok(vehicleDto);
     }
+
+//TODO implementar getVehiclesByDni modificar a list a devolver wrapper
+    @Override
+    public ResponseEntity<VehicleControllerDto> getVehicleByDni(String dniPropietario) {
+
+
+        return null;
+    }
+
+
 
 
 

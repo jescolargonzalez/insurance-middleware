@@ -407,19 +407,15 @@ components:
         id:
           type: integer
           format: int64
-          example: 10
-        userDni:
-          type: string
+        tomadorId:
+          type: integer
+        vehicleId:
+          type: integer
         benefitDni:
           type: string
-        type:
-          type: string
-          description: policy type
-          enum:
-            - fullrisk
-            - thirds
-        vehicle:
-          type: string
+          example: '22222222B'
+        typeId:
+          type: integer
 
     PolicyTypes:
       type: object

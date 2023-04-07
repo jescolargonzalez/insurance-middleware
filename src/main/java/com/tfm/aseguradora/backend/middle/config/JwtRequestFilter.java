@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.authentication.preauth.*;
-import com.tfm.aseguradora.backend.middle.users.dto.SessionInfoClientDto;
+import com.tfm.aseguradora.backend.generated.middle.users.dto.SessionInfoClientDto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.*;
 import org.springframework.web.filter.OncePerRequestFilter;

@@ -1,9 +1,10 @@
 package com.tfm.aseguradora.backend.middle.controller.mapper;
 
+import com.tfm.aseguradora.backend.generated.middle.controller.*;
 import com.tfm.aseguradora.backend.middle.controller.*;
 import com.tfm.aseguradora.backend.middle.service.domain.*;
 import org.mapstruct.*;
-import com.tfm.aseguradora.backend.middle.controller.UserControllerDto;
+import com.tfm.aseguradora.backend.generated.middle.controller.UserControllerDto;
 
 @Mapper(componentModel = "spring")
 public interface UserDtoControllerMapper {

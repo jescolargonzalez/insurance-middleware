@@ -8,7 +8,7 @@ import org.springframework.web.context.request.*;
 
 import java.time.*;
 
-import com.tfm.aseguradora.backend.middle.controller.ErrorMessageControllerDto;
+import com.tfm.aseguradora.backend.generated.middle.controller.ErrorMessageControllerDto;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public com.tfm.aseguradora.backend.middle.controller.ErrorMessageControllerDto resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+    public ErrorMessageControllerDto resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         ErrorMessageControllerDto message = new ErrorMessageControllerDto();
         message.setStatusCode(HttpStatus.NOT_FOUND.value());
         message.setTimestamp(OffsetDateTime.now());

@@ -4,7 +4,7 @@ import com.tfm.aseguradora.backend.middle.service.domain.*;
 import com.tfm.aseguradora.backend.middle.service.exception.*;
 import com.tfm.aseguradora.backend.middle.service.mapper.*;
 import org.springframework.beans.factory.annotation.*;
-import com.tfm.aseguradora.backend.middle.users.client.UserApi;
+import com.tfm.aseguradora.backend.generated.middle.users.client.UserApi;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.*;
 

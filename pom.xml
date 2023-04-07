@@ -152,8 +152,8 @@
 							<inputSpec>${project.basedir}/src/main/resources/middle-api-contract.yml</inputSpec>
 							<language>spring</language>
 							<modelNameSuffix>ControllerDto</modelNameSuffix>
-							<apiPackage>com.tfm.aseguradora.backend.middle.controller</apiPackage>
-							<modelPackage>com.tfm.aseguradora.backend.middle.controller</modelPackage>
+							<apiPackage>com.tfm.aseguradora.backend.generated.middle.controller</apiPackage>
+							<modelPackage>com.tfm.aseguradora.backend.generated.middle.controller</modelPackage>
 							<configOptions>
 								<java11>true</java11>
 								<sourceFolder>src/main/java/com/tfm/aseguradora/backend/middle/controller</sourceFolder>
@@ -170,8 +170,8 @@
 							<inputSpec>${project.basedir}/src/main/resources/policies-api-contract.yml</inputSpec>
 							<library>resttemplate</library>
 							<modelNameSuffix>ClientDto</modelNameSuffix>
-							<apiPackage>com.tfm.aseguradora.backend.middle.policies.client</apiPackage>
-							<modelPackage>com.tfm.aseguradora.backend.middle.policies.client.dto</modelPackage>
+							<apiPackage>com.tfm.aseguradora.backend.generated.middle.policies.client</apiPackage>
+							<modelPackage>com.tfm.aseguradora.backend.generated.middle.policies.client.dto</modelPackage>
 							<generateSupportingFiles>true</generateSupportingFiles>
 							<supportingFilesToGenerate>ApiClient.java,JavaTimeFormatter.java,Authentication.java,ApiKeyAuth.java,RFC3339DateFormat.java,HttpBasicAuth.java,HttpBearerAuth.java</supportingFilesToGenerate>
 							<generateApiTests>false</generateApiTests>
@@ -196,8 +196,8 @@
 							<inputSpec>${project.basedir}/src/main/resources/users-api-contract.yml</inputSpec>
 							<library>resttemplate</library>
 							<modelNameSuffix>ClientDto</modelNameSuffix>
-							<apiPackage>com.tfm.aseguradora.backend.middle.users.client</apiPackage>
-							<modelPackage>com.tfm.aseguradora.backend.middle.users.dto</modelPackage>
+							<apiPackage>com.tfm.aseguradora.backend.generated.middle.users.client</apiPackage>
+							<modelPackage>com.tfm.aseguradora.backend.generated.middle.users.dto</modelPackage>
 							<generateSupportingFiles>true</generateSupportingFiles>
 							<supportingFilesToGenerate>ApiClient.java,JavaTimeFormatter.java,Authentication.java,ApiKeyAuth.java,RFC3339DateFormat.java,HttpBasicAuth.java,HttpBearerAuth.java</supportingFilesToGenerate>
 							<generateApiTests>false</generateApiTests>

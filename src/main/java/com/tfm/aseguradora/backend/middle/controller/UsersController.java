@@ -1,25 +1,22 @@
 package com.tfm.aseguradora.backend.middle.controller;
 
-import com.tfm.aseguradora.backend.middle.controller.UsersApi;
+import com.tfm.aseguradora.backend.generated.middle.controller.*;
 import com.tfm.aseguradora.backend.middle.controller.mapper.*;
 import com.tfm.aseguradora.backend.middle.service.*;
-import io.swagger.models.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.*;
-import com.tfm.aseguradora.backend.middle.controller.UserControllerDto;
-import com.tfm.aseguradora.backend.middle.controller.PartControllerDto;
 import java.util.*;
 
 @RestController
 public class UsersController implements UsersApi {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserDtoControllerMapper mapper;
+    private UserDtoControllerMapper mapper;
 
     @Override
     public Optional<NativeWebRequest> getRequest() { return UsersApi.super.getRequest(); }
